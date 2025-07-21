@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="energyApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Energy Dashboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="controllers/mainController.js"></script>
+
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button { margin: 5px 0; padding: 8px; }
+    .entry { border-bottom: 1px solid #ccc; padding: 10px 0; }
+    .high-usage { color: red; font-weight: bold; }
+  </style>
+</head>
+<body ng-controller="energyCtrl">
+
+  <h2>⚡ Smart Energy Usage Dashboard</h2>
+
+  <label>Device Name</label><br>
+  <input type="text" ng-model="entry.device" placeholder="Ex: AC, Fridge"><br>
+
+  <label>Energy Used (kWh)</label><br>
+  <input type="number" ng-model="entry.usage" placeholder="Ex: 5.5"><br>
+
+  <button ng-click="addEntry()">Add Entry</button>
+
+  <h3>All Energy Usage Entries:</h3>
+  <div ng-repeat="e in entries" class="entry" ng-class="{'high-usage': e.usage > 10}">
+    🔌 <strong>{{e.device}}</strong> - {{e.usage}} kWh
+    <span ng-if="e.usage > 10">🚨 High Usage!</span>
+  </div>
+
+</body>
+</html>
